@@ -1,0 +1,982 @@
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Aref+Ruqaa+Ink:wght@400;700&family=Cormorant+Infant:wght@400;500;600;700&family=Montserrat:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap");
+
+:root {
+  --navy: #1f342d;
+  --navy-soft: #365247;
+  --ivory: #f7f4ea;
+  --paper: #fbf8ef;
+  --gold: #b89b63;
+  --gold-light: #d9c59a;
+  --dark-text: #284338;
+  --muted-text: #6b746f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background: #1f342d;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+.wedding-site {
+  width: 100%;
+  min-height: 100vh;
+  background: #1f342d;
+}
+
+/* Language switch */
+
+.language-switch {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 5000;
+
+  min-width: 145px;
+  min-height: 52px;
+  padding: 10px 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: 1px solid rgba(225, 202, 150, 0.9);
+  border-radius: 999px;
+
+  color: var(--gold-light);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(16, 38, 56, 0.98),
+      rgba(8, 21, 34, 0.98)
+    );
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.language-switch::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(225, 202, 150, 0.2);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.language-switch svg,
+.language-switch span {
+  position: relative;
+  z-index: 1;
+}
+
+.language-switch span {
+  white-space: nowrap;
+}
+
+.language-switch:hover {
+  color: var(--navy);
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.36),
+    0 0 22px rgba(200, 169, 107, 0.22);
+}
+
+.language-switch:active {
+  transform: scale(0.98);
+}
+
+.language-switch:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
+.wedding-site--arabic .language-switch {
+  right: auto;
+  left: 24px;
+  direction: ltr;
+}
+
+/* Welcome screen */
+
+.welcome-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 85px 20px 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(31, 52, 45, 0.90),
+      rgba(31, 52, 45, 0.98)
+    ),
+    radial-gradient(
+      circle at top left,
+      rgba(143, 176, 159, 0.40),
+      transparent 48%
+    ),
+    #1f342d;
+}
+
+.welcome-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.1;
+
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 48%,
+      rgba(255, 255, 255, 0.08) 49%,
+      rgba(255, 255, 255, 0.08) 51%,
+      transparent 52%
+    );
+
+  background-size: 40px 40px;
+}
+
+.background-glow {
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.16;
+}
+
+.background-glow--one {
+  top: -140px;
+  left: -90px;
+  background: var(--gold);
+}
+
+.background-glow--two {
+  right: -140px;
+  bottom: -140px;
+  background: #8fb09f;
+}
+
+.welcome-panel {
+  position: relative;
+  z-index: 2;
+
+  width: min(680px, 100%);
+  min-height: 650px;
+  padding: 82px 58px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  text-align: center;
+
+  border: 1px solid rgba(225, 202, 150, 0.62);
+
+  background:
+    linear-gradient(
+      rgba(31, 52, 45, 0.90),
+      rgba(31, 52, 45, 0.94)
+    ),
+    radial-gradient(
+      circle at center,
+      #3d5d50,
+      #1f342d 72%
+    );
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.46),
+    inset 0 0 50px rgba(255, 255, 255, 0.025);
+}
+
+.frame-corner {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+}
+
+.frame-corner--tl {
+  top: 24px;
+  left: 24px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+
+.frame-corner--tr {
+  top: 24px;
+  right: 24px;
+  border-top: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+}
+
+.frame-corner--bl {
+  bottom: 24px;
+  left: 24px;
+  border-bottom: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+
+.frame-corner--br {
+  right: 24px;
+  bottom: 24px;
+  border-right: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+}
+
+.monogram {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+
+  color: var(--gold-light);
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 34px;
+}
+
+.monogram i {
+  color: var(--gold);
+  font-family: "Allura", cursive;
+  font-size: 31px;
+  font-style: normal;
+}
+
+.welcome-kicker {
+  margin: 0 0 28px;
+
+  color: var(--gold-light);
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+}
+
+.welcome-names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-name {
+  color: var(--ivory) !important;
+  background: none !important;
+  background-image: none !important;
+
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: var(--ivory) !important;
+
+  font-family: "Allura", cursive;
+  font-size: clamp(75px, 12vw, 120px);
+  font-weight: 400;
+  line-height: 0.8;
+
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.welcome-ampersand {
+  margin: 25px 0 18px;
+
+  color: var(--gold);
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 43px;
+}
+
+.welcome-description {
+  margin: 42px 0;
+
+  color: #d9d4ca;
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 23px;
+  line-height: 1.55;
+}
+
+.open-invitation-button {
+  min-width: 220px;
+  min-height: 58px;
+  padding: 14px 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+
+  border: 1px solid var(--gold);
+
+  color: #1f342d;
+  background: linear-gradient(
+    135deg,
+    #d8c89f,
+    #b89b63
+  );
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.open-invitation-button:hover {
+  color: var(--gold-light);
+  background: transparent;
+}
+
+/* Invitation */
+
+.invitation-section {
+  min-height: 100vh;
+  padding: 80px 20px 60px;
+
+  display: flex;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      rgba(31, 52, 45, 0.96),
+      rgba(31, 52, 45, 0.98)
+    ),
+    radial-gradient(
+      circle at center,
+      #527766,
+      #1f342d 68%
+    );
+}
+
+.invitation-paper {
+  position: relative;
+
+  width: min(850px, 100%);
+  min-height: 1250px;
+  padding: 110px 90px;
+
+  overflow: hidden;
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 28%,
+      rgba(255, 255, 255, 0.82),
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      #fbf8ef 0%,
+      #f5f3e8 100%
+    );
+
+  box-shadow:
+    0 40px 90px rgba(18, 36, 30, 0.46),
+    inset 0 0 90px rgba(111, 143, 127, 0.10);
+}
+
+.invitation-paper::before {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(200, 169, 107, 0.7);
+  pointer-events: none;
+}
+
+.botanical {
+  position: absolute;
+  width: 220px;
+  height: 300px;
+  opacity: 0.52;
+}
+
+.botanical--top {
+  top: 0;
+  left: 0;
+}
+
+.botanical--bottom {
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.botanical-stem {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+
+  width: 2px;
+  height: 250px;
+
+  background: var(--gold);
+
+  transform: rotate(-38deg);
+  transform-origin: top;
+}
+
+.botanical-leaf {
+  position: absolute;
+
+  width: 55px;
+  height: 23px;
+
+  border: 1px solid var(--gold);
+  border-radius: 100% 0 100% 0;
+}
+
+.botanical-leaf--1 {
+  top: 65px;
+  left: 70px;
+  transform: rotate(-20deg);
+}
+
+.botanical-leaf--2 {
+  top: 115px;
+  left: 35px;
+  transform: rotate(145deg);
+}
+
+.botanical-leaf--3 {
+  top: 165px;
+  left: 105px;
+  transform: rotate(-25deg);
+}
+
+.botanical-leaf--4 {
+  top: 215px;
+  left: 68px;
+  transform: rotate(145deg);
+}
+
+.paper-monogram {
+  margin-bottom: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.paper-monogram span {
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.paper-monogram i {
+  color: var(--gold);
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 22px;
+  font-style: normal;
+  letter-spacing: 3px;
+}
+
+.section-kicker,
+.marriage-heading,
+.venue-label {
+  color: #8a7448;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+}
+
+.invitation-names {
+  margin: 45px 0 35px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invitation-name {
+  color: var(--dark-text) !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: var(--dark-text) !important;
+
+  font-family: "Allura", cursive;
+  font-size: clamp(90px, 13vw, 145px);
+  font-weight: 400;
+  line-height: 0.78;
+
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.invitation-ampersand {
+  margin: 30px 0 20px;
+
+  color: var(--gold);
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 45px;
+}
+
+.invitation-description {
+  max-width: 580px;
+  margin: 40px auto 60px;
+
+  color: var(--muted-text);
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 24px;
+  line-height: 1.6;
+}
+
+.date-grid {
+  max-width: 650px;
+  margin: 0 auto 70px;
+
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  align-items: center;
+
+  border-top: 1px solid var(--gold-light);
+  border-bottom: 1px solid var(--gold-light);
+}
+
+.date-side {
+  min-height: 130px;
+
+  display: grid;
+  place-items: center;
+
+  color: #4e6258;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.date-main {
+  min-height: 165px;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-right: 1px solid var(--gold-light);
+  border-left: 1px solid var(--gold-light);
+}
+
+.date-main strong {
+  color: var(--dark-text);
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 65px;
+  font-weight: 500;
+  line-height: 0.9;
+}
+
+.date-main span {
+  margin-top: 8px;
+
+  color: #8a7448;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.date-main small {
+  margin-top: 7px;
+
+  color: #707a74;
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 19px;
+}
+
+.ornament-divider {
+  max-width: 430px;
+  margin: 0 auto 65px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ornament-divider span {
+  flex: 1;
+  height: 1px;
+  background: var(--gold-light);
+}
+
+.ornament-divider i {
+  width: 12px;
+  height: 12px;
+
+  border: 1px solid var(--gold);
+
+  transform: rotate(45deg);
+}
+
+.venue-block h2 {
+  margin: 30px 0 20px;
+
+  color: var(--dark-text);
+
+  font-family: "Cormorant Infant", serif;
+  font-size: clamp(48px, 7vw, 72px);
+  font-weight: 500;
+}
+
+.venue-block > p:last-child {
+  max-width: 500px;
+  margin: auto;
+
+  color: #6d7772;
+
+  font-family: "Cormorant Infant", serif;
+  font-size: 22px;
+  line-height: 1.55;
+}
+
+.invitation-actions {
+  max-width: 620px;
+  margin: 65px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.invitation-action {
+  min-height: 72px;
+  padding: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+
+  border: 1px solid var(--gold);
+
+  color: var(--dark-text);
+  background: transparent;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.invitation-action:hover {
+  color: var(--paper);
+  background: #1f342d;
+  transform: translateY(-2px);
+}
+
+.closing-message {
+  margin: 85px 0 0;
+
+  color: #8a7448;
+
+  font-family: "Allura", cursive;
+  font-size: 42px;
+}
+
+/* Arabic */
+
+.wedding-site--arabic {
+  font-family: "Noto Naskh Arabic", serif;
+}
+
+.wedding-site--arabic .welcome-kicker,
+.wedding-site--arabic .section-kicker,
+.wedding-site--arabic .marriage-heading,
+.wedding-site--arabic .venue-label {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.wedding-site--arabic .welcome-name {
+  width: 100%;
+  color: var(--ivory) !important;
+  background: transparent !important;
+  background-image: none !important;
+
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: var(--ivory) !important;
+
+  font-family: "Aref Ruqaa Ink", "Noto Naskh Arabic", serif;
+  font-size: clamp(66px, 10vw, 105px);
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.wedding-site--arabic .invitation-name {
+  width: 100%;
+  color: var(--dark-text) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: var(--dark-text) !important;
+
+  font-family: "Aref Ruqaa Ink", "Noto Naskh Arabic", serif;
+  font-size: clamp(75px, 11vw, 125px);
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.wedding-site--arabic .welcome-description {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 25px;
+  line-height: 1.9;
+}
+
+.wedding-site--arabic .open-invitation-button {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 17px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.wedding-site--arabic .invitation-description {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 26px;
+  line-height: 1.9;
+}
+
+.wedding-site--arabic .date-side {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 17px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.wedding-site--arabic .date-main span {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 18px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.wedding-site--arabic .venue-block h2 {
+  font-family: "Aref Ruqaa Ink", serif;
+}
+
+.wedding-site--arabic .venue-block > p:last-child {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 24px;
+  line-height: 1.8;
+}
+
+.wedding-site--arabic .invitation-action {
+  font-family: "Noto Naskh Arabic", serif;
+  font-size: 16px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.wedding-site--arabic .closing-message {
+  font-family: "Aref Ruqaa Ink", serif;
+  font-size: 38px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .language-switch {
+    top: 14px;
+    right: 14px;
+
+    min-width: 112px;
+    min-height: 43px;
+    padding: 8px 14px;
+
+    font-size: 11px;
+  }
+
+  .wedding-site--arabic .language-switch {
+    right: auto;
+    left: 14px;
+  }
+
+  .welcome-section {
+    padding: 70px 14px 25px;
+  }
+
+  .welcome-panel {
+    min-height: 620px;
+    padding: 70px 25px;
+  }
+
+  .welcome-description {
+    font-size: 20px;
+  }
+
+  .invitation-section {
+    padding: 65px 0 0;
+  }
+
+  .invitation-paper {
+    min-height: 100vh;
+    padding: 90px 28px;
+  }
+
+  .invitation-paper::before {
+    inset: 12px;
+  }
+
+  .botanical {
+    width: 150px;
+    height: 210px;
+    transform: scale(0.7);
+    transform-origin: top left;
+  }
+
+  .botanical--bottom {
+    transform: rotate(180deg) scale(0.7);
+    transform-origin: bottom right;
+  }
+
+  .invitation-name {
+    font-size: clamp(82px, 26vw, 115px);
+  }
+
+  .invitation-description {
+    font-size: 21px;
+  }
+
+  .date-grid {
+    grid-template-columns: 1fr;
+    border-bottom: 0;
+  }
+
+  .date-side {
+    min-height: 70px;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  .date-main {
+    border-right: 0;
+    border-bottom: 1px solid var(--gold-light);
+    border-left: 0;
+  }
+
+  .invitation-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .closing-message {
+    font-size: 34px;
+  }
+
+  .wedding-site--arabic .welcome-name {
+    font-size: clamp(57px, 18vw, 82px);
+  }
+
+  .wedding-site--arabic .invitation-name {
+    font-size: clamp(64px, 20vw, 95px);
+  }
+
+  .wedding-site--arabic .welcome-description {
+    font-size: 21px;
+  }
+
+  .wedding-site--arabic .invitation-description {
+    font-size: 22px;
+  }
+}
