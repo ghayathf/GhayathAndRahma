@@ -10,7 +10,11 @@ import {
 } from "lucide-react";
 import "./App.css";
 
-const WEDDING_DATE = new Date("2026-08-15T19:00:00+03:00");
+const EVENT = {
+  date: new Date("2026-08-11T19:00:00+03:00"),
+  calendarDates: "20260811T160000Z/20260811T200000Z",
+  locationUrl: "https://maps.app.goo.gl/SQRDEtAfUsWxgLCe8",
+};
 
 const translations = {
   en: {
@@ -26,10 +30,11 @@ const translations = {
     marriageHeading: "ARE GETTING MARRIED",
     invitation:
       "With joyful hearts, we invite you to share the beginning of our new chapter.",
-    day: "Saturday",
-    fullDate: "15 August 2026",
-    month: "August",
-    time: "7:00 PM",
+    day: "Tuesday",
+    fullDate: "11 August 2026",
+    dateNumber: "11",
+    monthYear: "August 2026",
+    time: "7:30 PM",
     timeNote: "The celebration begins promptly",
     countdownTitle: "Counting down to our special evening",
     days: "Days",
@@ -39,7 +44,8 @@ const translations = {
     weddingToday: "Today is the day!",
     celebrationStarted: "The celebration has begun",
     venueLabel: "THE CELEBRATION WILL TAKE PLACE AT",
-    venue: "Huson Hills",
+    venue: "Zoya Events Garden",
+    venueAddress: "Irbid · Petra Street",
     venueDescription:
       "We would be delighted to celebrate this unforgettable evening with you.",
     directions: "Get Directions",
@@ -62,9 +68,10 @@ const translations = {
     marriageHeading: "يحتفلان بزفافهما",
     invitation:
       "بقلوب مملوءة بالفرح، يسعدنا أن تشاركونا بداية فصل جديد من حياتنا.",
-    day: "السبت",
-    fullDate: "15 آب 2026",
-    month: "آب",
+    day: "الثلاثاء",
+    fullDate: "11 آب 2026",
+    dateNumber: "11",
+    monthYear: "آب 2026",
     time: "7:00 مساءً",
     timeNote: "يبدأ الحفل في الموعد المحدد",
     countdownTitle: "العد التنازلي لأمسيتنا المميزة",
@@ -75,7 +82,8 @@ const translations = {
     weddingToday: "اليوم يوم فرحتنا!",
     celebrationStarted: "بدأت فرحتنا",
     venueLabel: "سيقام حفل الزفاف في",
-    venue: "الحصن هيلز",
+    venue: "Zoya Events Garden",
+    venueAddress: "إربد · شارع البتراء",
     venueDescription:
       "يسعدنا ويشرفنا أن نحتفل معكم في هذه الأمسية التي لا تُنسى.",
     directions: "الموقع",
@@ -88,7 +96,7 @@ const translations = {
 };
 
 function getTimeRemaining() {
-  const difference = WEDDING_DATE.getTime() - Date.now();
+  const difference = EVENT.date.getTime() - Date.now();
 
   if (difference <= 0) {
     return { total: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -110,6 +118,34 @@ function WeddingName({ children, isArabic, variant }) {
       dir={isArabic ? "rtl" : "ltr"}
     >
       {children}
+    </div>
+  );
+}
+
+function FloralCluster({ position }) {
+  return (
+    <div className={`floral-cluster floral-cluster--${position}`} aria-hidden="true">
+      <span className="floral-branch floral-branch--one" />
+      <span className="floral-branch floral-branch--two" />
+      <span className="floral-leaf floral-leaf--navy floral-leaf--one" />
+      <span className="floral-leaf floral-leaf--navy floral-leaf--two" />
+      <span className="floral-leaf floral-leaf--gold floral-leaf--three" />
+      <span className="floral-leaf floral-leaf--gold floral-leaf--four" />
+      <span className="floral-leaf floral-leaf--cream floral-leaf--five" />
+      <span className="floral-rose floral-rose--large" />
+      <span className="floral-rose floral-rose--small" />
+      <span className="floral-bud floral-bud--one" />
+      <span className="floral-bud floral-bud--two" />
+    </div>
+  );
+}
+
+function CrownOrnament() {
+  return (
+    <div className="crown-ornament" aria-hidden="true">
+      <span />
+      <i />
+      <span />
     </div>
   );
 }
@@ -145,7 +181,7 @@ function Countdown({ text }) {
       aria-live="polite"
     >
       <div className="countdown-heading">
-        <Clock3 size={20} aria-hidden="true" />
+        <Clock3 size={19} aria-hidden="true" />
         <span>
           {remaining.total > 0 ? text.countdownTitle : text.celebrationStarted}
         </span>
@@ -173,7 +209,6 @@ function App() {
 
   const text = translations[language];
   const isArabic = language === "ar";
-  const locationUrl = "https://maps.app.goo.gl/q65BfzAxQ2MuegHN6";
 
   const toggleLanguage = () => {
     setLanguage((currentLanguage) =>
@@ -189,14 +224,13 @@ function App() {
   const addToCalendar = () => {
     const title = encodeURIComponent(text.calendarTitle);
     const description = encodeURIComponent(text.calendarDescription);
-    const location = encodeURIComponent(text.venue);
-    const dates = "20260815T160000Z/20260815T200000Z";
+    const location = encodeURIComponent(`${text.venue}, ${text.venueAddress}`);
 
     const calendarUrl =
       "https://calendar.google.com/calendar/render" +
       "?action=TEMPLATE" +
       `&text=${title}` +
-      `&dates=${dates}` +
+      `&dates=${EVENT.calendarDates}` +
       `&details=${description}` +
       `&location=${location}`;
 
@@ -228,27 +262,23 @@ function App() {
             className="welcome-section"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.03 }}
+            exit={{ opacity: 0, scale: 1.025 }}
             transition={{ duration: 0.65 }}
           >
-            <div className="background-glow background-glow--one" />
-            <div className="background-glow background-glow--two" />
-
             <motion.div
-              className="welcome-panel"
+              className="welcome-panel invitation-arch"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: "easeOut" }}
             >
-              <span className="frame-corner frame-corner--tl" />
-              <span className="frame-corner frame-corner--tr" />
-              <span className="frame-corner frame-corner--bl" />
-              <span className="frame-corner frame-corner--br" />
+              <FloralCluster position="top" />
+              <FloralCluster position="bottom" />
+              <CrownOrnament />
 
               <motion.div
                 className="monogram"
                 dir="ltr"
-                animate={{ rotate: [0, 1.5, 0, -1.5, 0] }}
+                animate={{ rotate: [0, 1.2, 0, -1.2, 0] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
               >
                 <span>G</span>
@@ -303,22 +333,10 @@ function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <article className="invitation-paper">
-              <div className="botanical botanical--top" aria-hidden="true">
-                <span className="botanical-stem" />
-                <span className="botanical-leaf botanical-leaf--1" />
-                <span className="botanical-leaf botanical-leaf--2" />
-                <span className="botanical-leaf botanical-leaf--3" />
-                <span className="botanical-leaf botanical-leaf--4" />
-              </div>
-
-              <div className="botanical botanical--bottom" aria-hidden="true">
-                <span className="botanical-stem" />
-                <span className="botanical-leaf botanical-leaf--1" />
-                <span className="botanical-leaf botanical-leaf--2" />
-                <span className="botanical-leaf botanical-leaf--3" />
-                <span className="botanical-leaf botanical-leaf--4" />
-              </div>
+            <article className="invitation-paper invitation-arch">
+              <FloralCluster position="top" />
+              <FloralCluster position="bottom" />
+              <CrownOrnament />
 
               <div className="paper-monogram" dir="ltr">
                 <span />
@@ -341,20 +359,23 @@ function App() {
               <p className="marriage-heading">{text.marriageHeading}</p>
               <p className="invitation-description">{text.invitation}</p>
 
-              <section className="event-moment" aria-label={`${text.fullDate}, ${text.time}`}>
+              <section
+                className="event-moment"
+                aria-label={`${text.fullDate}, ${text.time}`}
+              >
                 <div className="event-moment-date">
                   <span>{text.day}</span>
-                  <strong>15</strong>
-                  <small>{text.month} 2026</small>
+                  <strong>{text.dateNumber}</strong>
+                  <small>{text.monthYear}</small>
                 </div>
 
                 <motion.div
                   className="event-moment-time"
                   animate={{
                     boxShadow: [
-                      "0 0 0 0 rgba(184,155,99,0)",
-                      "0 0 0 10px rgba(184,155,99,0.10)",
-                      "0 0 0 0 rgba(184,155,99,0)",
+                      "0 0 0 0 rgba(191,149,87,0)",
+                      "0 0 0 10px rgba(191,149,87,0.10)",
+                      "0 0 0 0 rgba(191,149,87,0)",
                     ],
                   }}
                   transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
@@ -378,12 +399,16 @@ function App() {
               <section className="venue-block">
                 <p className="venue-label">{text.venueLabel}</p>
                 <h2>{text.venue}</h2>
-                <p>{text.venueDescription}</p>
+                <p className="venue-address">
+                  <MapPin size={18} />
+                  <span>{text.venueAddress}</span>
+                </p>
+                <p className="venue-description">{text.venueDescription}</p>
               </section>
 
               <div className="invitation-actions">
                 <a
-                  href={locationUrl}
+                  href={EVENT.locationUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="invitation-action invitation-action--primary"
